@@ -41,17 +41,41 @@ pipeline {
 
         }
 
-        stage('Publish HTML Report') {
+        stage('Run JMeter Tests') {
+
+            steps {
+
+                dir('Notes_15') {
+
+                    bat '''
+                    jmeter -n ^
+                    -t performance/jmeter/testplans/testplan.jmx ^
+                    -l performance/jmeter/results/results.jtl ^
+                    -j performance/jmeter/results/jmeter.log
+                    '''
+
+                    bat '''
+                    jmeter -g performance/jmeter/results/results.jtl ^
+                    -o performance/jmeter/results/html-report
+                    '''
+
+                }
+
+            }
+
+        }
+
+        stage('Publish JMeter Report') {
 
             steps {
 
                 publishHTML([
-                        allowMissing         : false,
-                        alwaysLinkToLastBuild: true,
-                        keepAll              : true,
-                        reportDir            : 'Notes_15/test-output',
-                        reportFiles          : 'emailable-report.html',
-                        reportName           : 'TestNG HTML Report'
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'Notes_15/performance/jmeter/results/html-report',
+                    reportFiles: 'index.html',
+                    reportName: 'JMeter HTML Report'
                 ])
 
             }
