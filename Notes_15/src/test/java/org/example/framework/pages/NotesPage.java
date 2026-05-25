@@ -23,7 +23,7 @@ public class NotesPage {
         this.driver = driver;
     }
 
-    // ── Locators ──────────────────────────────────────────────────────────────
+    //Locators 
 
     private final By addBtn =
             By.cssSelector("[data-testid='add-new-note']");
@@ -82,7 +82,7 @@ public class NotesPage {
                             + " or contains(text(),'Confirm')]"
             );
 
-    // ── Public actions ────────────────────────────────────────────────────────
+    //Public actions 
 
     public void createNote(String title, String desc) {
 
@@ -206,7 +206,7 @@ public class NotesPage {
         }
     }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
+    // Private helpers
 
     private void closeAdIfPresent() {
 

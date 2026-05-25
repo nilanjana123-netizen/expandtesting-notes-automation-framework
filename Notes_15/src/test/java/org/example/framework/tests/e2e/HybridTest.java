@@ -21,7 +21,7 @@ public class HybridTest extends BaseTest {
 
     public void hybridTest() {
 
-        // Step 1: Login via UI
+        // Step 1:Login via UI
 
         LoginPage loginPage = new LoginPage(driver);
 
@@ -35,7 +35,7 @@ public class HybridTest extends BaseTest {
                 "Dashboard was not displayed after login"
         );
 
-        // Step 2: Create a note via UI
+        // Step 2:Create a note via UI
 
         NotesPage notesPage = new NotesPage(driver);
 
@@ -48,7 +48,7 @@ public class HybridTest extends BaseTest {
                 "Hybrid note was not visible in UI after creation"
         );
 
-        // Step 3: Verify the same note exists via API
+        // Step 3:Verify the same note exists via API
 
         String token = AuthApiUtils.getToken();
 
