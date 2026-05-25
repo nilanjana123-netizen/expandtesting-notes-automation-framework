@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jmeterTestPlan version="1.2" properties="5.0">
+
+    <hashTree>
+
+        <!-- TEST PLAN -->
+
+        <TestPlan guiclass="TestPlanGui"
+                  testclass="TestPlan"
+                  testname="Notes API Performance Test">
+
+            <stringProp name="TestPlan.comments">Login API Load and Performance Testing</stringProp>
+
+            <boolProp name="TestPlan.functional_mode">false</boolProp>
+
+            <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+
+            <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+
+        </TestPlan>
+
+        <hashTree>
+
+            <!-- THREAD GROUP -->
+
+            <ThreadGroup guiclass="ThreadGroupGui"
+                         testclass="ThreadGroup"
+                         testname="10 Virtual Users">
+
+                <!-- NUMBER OF USERS -->
+
+                <stringProp name="ThreadGroup.num_threads">10</stringProp>
+
+                <!-- USERS START WITHIN 5 SECONDS -->
+
+                <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+
+                <!-- ENABLE TIME LIMIT -->
+
+                <boolProp name="ThreadGroup.scheduler">true</boolProp>
+
+                <!-- TOTAL TEST EXECUTION TIME -->
+
+                <stringProp name="ThreadGroup.duration">30</stringProp>
+
+                <!-- LOOP CONTINUOUSLY UNTIL 30 SECONDS -->
+
+                <elementProp name="ThreadGroup.main_controller"
+                             elementType="LoopController"
+                             guiclass="LoopControlPanel"
+                             testclass="LoopController"
+                             testname="Loop Controller">
+
+                    <boolProp name="LoopController.continue_forever">false</boolProp>
+
+                    <stringProp name="LoopController.loops">-1</stringProp>
+
+                </elementProp>
+
+            </ThreadGroup>
+
+            <hashTree>
+
+                <!-- LOGIN API REQUEST -->
+
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui"
+                                  testclass="HTTPSamplerProxy"
+                                  testname="Login API Request">
+
+                    <stringProp name="HTTPSampler.protocol">https</stringProp>
+
+                    <stringProp name="HTTPSampler.domain">practice.expandtesting.com</stringProp>
+
+                    <stringProp name="HTTPSampler.path">/notes/api/users/login</stringProp>
+
+                    <stringProp name="HTTPSampler.method">POST</stringProp>
+
+                    <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+
+                    <elementProp name="HTTPsampler.Arguments"
+                                 elementType="Arguments">
+
+                        <collectionProp name="Arguments.arguments">
+
+                            <elementProp name=""
+                                         elementType="HTTPArgument">
+
+                                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+
+                                <stringProp name="Argument.value">{
+  "email":"apple1@gmail.com",
+  "password":"1apple"
+}</stringProp>
+
+                                <stringProp name="Argument.metadata">=</stringProp>
+
+                            </elementProp>
+
+                        </collectionProp>
+
+                    </elementProp>
+
+                </HTTPSamplerProxy>
+
+                <hashTree>
+
+                    <!-- HEADER MANAGER -->
+
+                    <HeaderManager guiclass="HeaderPanel"
+                                   testclass="HeaderManager"
+                                   testname="HTTP Header Manager">
+
+                        <collectionProp name="HeaderManager.headers">
+
+                            <elementProp name=""
+                                         elementType="Header">
+
+                                <stringProp name="Header.name">Content-Type</stringProp>
+
+                                <stringProp name="Header.value">application/json</stringProp>
+
+                            </elementProp>
+
+                        </collectionProp>
+
+                    </HeaderManager>
+
+                    <hashTree/>
+
+                    <!-- STATUS CODE ASSERTION -->
+
+                    <ResponseAssertion guiclass="AssertionGui"
+                                       testclass="ResponseAssertion"
+                                       testname="Check Status Code">
+
+                        <collectionProp name="Asserion.test_strings">
+
+                            <stringProp name="1">200</stringProp>
+
+                        </collectionProp>
+
+                        <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+
+                        <boolProp name="Assertion.assume_success">false</boolProp>
+
+                        <intProp name="Assertion.test_type">8</intProp>
+
+                    </ResponseAssertion>
+
+                    <hashTree/>
+
+                    <!-- PERFORMANCE ASSERTION -->
+
+                    <DurationAssertion guiclass="DurationAssertionGui"
+                                       testclass="DurationAssertion"
+                                       testname="Response Time Assertion">
+
+                        <!-- FAIL IF RESPONSE > 3000 ms -->
+
+                        <stringProp name="DurationAssertion.duration">3000</stringProp>
+
+                    </DurationAssertion>
+
+                    <hashTree/>
+
+                </hashTree>
+
+            </hashTree>
+
+        </hashTree>
+
+    </hashTree>
+
+</jmeterTestPlan>

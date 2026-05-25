@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="15" passed="15" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-25T11:19:29 IST" name="Notes Automation Suite" finished-at="2026-05-25T11:23:53 IST" duration-ms="264305">
+    <groups>
+    </groups>
+    <test started-at="2026-05-25T11:19:29 IST" name="API Tests" finished-at="2026-05-25T11:19:41 IST" duration-ms="12306">
+      <class name="org.example.framework.tests.api.FetchNoteApiTest">
+        <test-method signature="fetchNoteApiTest()[pri:0, instance:org.example.framework.tests.api.FetchNoteApiTest@2584b82d]" started-at="2026-05-25T11:19:37 IST" name="fetchNoteApiTest" finished-at="2026-05-25T11:19:38 IST" duration-ms="1169" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fetchNoteApiTest -->
+        <test-method signature="fetchNotesWithoutTokenTest()[pri:0, instance:org.example.framework.tests.api.FetchNoteApiTest@2584b82d]" started-at="2026-05-25T11:19:38 IST" name="fetchNotesWithoutTokenTest" finished-at="2026-05-25T11:19:38 IST" duration-ms="449" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fetchNotesWithoutTokenTest -->
+      </class> <!-- org.example.framework.tests.api.FetchNoteApiTest -->
+      <class name="org.example.framework.tests.api.DeleteNoteApiTest">
+        <test-method signature="deleteNonExistentNoteTest()[pri:0, instance:org.example.framework.tests.api.DeleteNoteApiTest@7bbc8656]" started-at="2026-05-25T11:19:38 IST" name="deleteNonExistentNoteTest" finished-at="2026-05-25T11:19:39 IST" duration-ms="1068" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteNonExistentNoteTest -->
+        <test-method signature="deleteNoteApiTest()[pri:0, instance:org.example.framework.tests.api.DeleteNoteApiTest@7bbc8656]" started-at="2026-05-25T11:19:39 IST" name="deleteNoteApiTest" finished-at="2026-05-25T11:19:41 IST" duration-ms="1796" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteNoteApiTest -->
+      </class> <!-- org.example.framework.tests.api.DeleteNoteApiTest -->
+      <class name="org.example.framework.tests.api.CreateNoteApiTest">
+        <test-method signature="createNoteApiTest()[pri:0, instance:org.example.framework.tests.api.CreateNoteApiTest@7dfd3c81]" started-at="2026-05-25T11:19:29 IST" name="createNoteApiTest" finished-at="2026-05-25T11:19:35 IST" duration-ms="6520" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNoteApiTest -->
+        <test-method signature="createNoteEmptyTitleTest()[pri:0, instance:org.example.framework.tests.api.CreateNoteApiTest@7dfd3c81]" started-at="2026-05-25T11:19:35 IST" name="createNoteEmptyTitleTest" finished-at="2026-05-25T11:19:37 IST" duration-ms="1059" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNoteEmptyTitleTest -->
+      </class> <!-- org.example.framework.tests.api.CreateNoteApiTest -->
+    </test> <!-- API Tests -->
+    <test started-at="2026-05-25T11:19:29 IST" name="Hybrid Tests" finished-at="2026-05-25T11:20:13 IST" duration-ms="43799">
+      <class name="org.example.framework.tests.e2e.HybridTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.e2e.HybridTest@626abbd0]" started-at="2026-05-25T11:19:29 IST" name="setup" finished-at="2026-05-25T11:19:41 IST" duration-ms="12077" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="hybridTest()[pri:0, instance:org.example.framework.tests.e2e.HybridTest@626abbd0]" started-at="2026-05-25T11:19:41 IST" name="hybridTest" finished-at="2026-05-25T11:20:12 IST" duration-ms="30983" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- hybridTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.e2e.HybridTest@626abbd0]" started-at="2026-05-25T11:20:12 IST" name="tearDown" finished-at="2026-05-25T11:20:13 IST" duration-ms="647" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.example.framework.tests.e2e.HybridTest -->
+    </test> <!-- Hybrid Tests -->
+    <test started-at="2026-05-25T11:19:29 IST" name="UI Tests" finished-at="2026-05-25T11:23:53 IST" duration-ms="264305">
+      <class name="org.example.framework.tests.ui.DeleteNoteTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.DeleteNoteTest@1807e3f6]" started-at="2026-05-25T11:22:54 IST" name="setup" finished-at="2026-05-25T11:23:01 IST" duration-ms="6975" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="fetchExistingNoteTitle()[pri:0, instance:org.example.framework.tests.ui.DeleteNoteTest@1807e3f6]" started-at="2026-05-25T11:23:01 IST" name="fetchExistingNoteTitle" finished-at="2026-05-25T11:23:03 IST" duration-ms="2157" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fetchExistingNoteTitle -->
+        <test-method signature="deleteExistingNoteTest()[pri:0, instance:org.example.framework.tests.ui.DeleteNoteTest@1807e3f6]" started-at="2026-05-25T11:23:03 IST" name="deleteExistingNoteTest" finished-at="2026-05-25T11:23:52 IST" duration-ms="49237" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteExistingNoteTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.DeleteNoteTest@1807e3f6]" started-at="2026-05-25T11:23:52 IST" name="tearDown" finished-at="2026-05-25T11:23:53 IST" duration-ms="608" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.example.framework.tests.ui.DeleteNoteTest -->
+      <class name="org.example.framework.tests.ui.LoginTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:30 IST" name="setup" finished-at="2026-05-25T11:19:39 IST" duration-ms="8961" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginTest(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:39 IST" name="loginTest" data-provider="loginData" finished-at="2026-05-25T11:19:42 IST" duration-ms="2324" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[apple1@gmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1apple]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[pass]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:42 IST" name="tearDown" finished-at="2026-05-25T11:19:43 IST" duration-ms="860" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:43 IST" name="setup" finished-at="2026-05-25T11:19:50 IST" duration-ms="7961" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginTest(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:50 IST" name="loginTest" data-provider="loginData" finished-at="2026-05-25T11:19:54 IST" duration-ms="3197" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[apple1@gmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[wrong123]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[fail]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:54 IST" name="tearDown" finished-at="2026-05-25T11:19:54 IST" duration-ms="630" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:19:54 IST" name="setup" finished-at="2026-05-25T11:20:30 IST" duration-ms="36172" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginTest(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:20:30 IST" name="loginTest" data-provider="loginData" finished-at="2026-05-25T11:20:33 IST" duration-ms="2777" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[fail]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.LoginTest@303cf2ba]" started-at="2026-05-25T11:20:33 IST" name="tearDown" finished-at="2026-05-25T11:20:34 IST" duration-ms="622" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.example.framework.tests.ui.LoginTest -->
+      <class name="org.example.framework.tests.ui.EditNoteTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.EditNoteTest@6f01b95f]" started-at="2026-05-25T11:22:23 IST" name="setup" finished-at="2026-05-25T11:22:28 IST" duration-ms="5229" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="fetchExistingNoteTitle()[pri:0, instance:org.example.framework.tests.ui.EditNoteTest@6f01b95f]" started-at="2026-05-25T11:22:28 IST" name="fetchExistingNoteTitle" finished-at="2026-05-25T11:22:29 IST" duration-ms="1252" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fetchExistingNoteTitle -->
+        <test-method signature="editExistingNoteTest()[pri:0, instance:org.example.framework.tests.ui.EditNoteTest@6f01b95f]" started-at="2026-05-25T11:22:29 IST" name="editExistingNoteTest" finished-at="2026-05-25T11:22:53 IST" duration-ms="24323" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editExistingNoteTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.EditNoteTest@6f01b95f]" started-at="2026-05-25T11:22:53 IST" name="tearDown" finished-at="2026-05-25T11:22:54 IST" duration-ms="599" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.example.framework.tests.ui.EditNoteTest -->
+      <class name="org.example.framework.tests.ui.CreateNoteTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:20:34 IST" name="setup" finished-at="2026-05-25T11:20:41 IST" duration-ms="6756" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="createNoteTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:20:41 IST" name="createNoteTest" data-provider="notesData" finished-at="2026-05-25T11:21:09 IST" duration-ms="28200" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Home]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Vegetables]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Carrot, cabbage, tomato]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[pass]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNoteTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:21:09 IST" name="tearDown" finished-at="2026-05-25T11:21:10 IST" duration-ms="597" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:21:10 IST" name="setup" finished-at="2026-05-25T11:21:17 IST" duration-ms="6977" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="createNoteTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:21:17 IST" name="createNoteTest" data-provider="notesData" finished-at="2026-05-25T11:21:30 IST" duration-ms="13737" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Home]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[I like ice-cream]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[fail]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNoteTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:21:30 IST" name="tearDown" finished-at="2026-05-25T11:21:31 IST" duration-ms="645" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:21:31 IST" name="setup" finished-at="2026-05-25T11:21:38 IST" duration-ms="7491" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="createNoteTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:21:38 IST" name="createNoteTest" data-provider="notesData" finished-at="2026-05-25T11:22:22 IST" duration-ms="43572" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Home]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Grocery List]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[fail]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNoteTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.example.framework.tests.ui.CreateNoteTest@7d900ecf]" started-at="2026-05-25T11:22:22 IST" name="tearDown" finished-at="2026-05-25T11:22:23 IST" duration-ms="625" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.example.framework.tests.ui.CreateNoteTest -->
+    </test> <!-- UI Tests -->
+  </suite> <!-- Notes Automation Suite -->
+</testng-results>
