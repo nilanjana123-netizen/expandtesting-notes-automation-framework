@@ -175,11 +175,9 @@ public class NotesPage {
         try {
 
             new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.or(
-                            ExpectedConditions.visibilityOfElementLocated(card),
-                            ExpectedConditions.invisibilityOfElementLocated(card)));
+                    .until(ExpectedConditions.visibilityOfElementLocated(card));
 
-            return !driver.findElements(card).isEmpty();
+            return true;
 
         } catch (Exception e) {
 
@@ -187,7 +185,27 @@ public class NotesPage {
         }
     }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
+    public boolean isNoteAbsent(String title) {
+
+        if (title == null || title.isEmpty())
+            return true;
+
+        By card = By.xpath(
+                "//div[@data-testid='note-card-title'"
+                        + " and text()='" + title + "']");
+
+        try {
+
+            return new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.invisibilityOfElementLocated(card));
+
+        } catch (Exception e) {
+
+            return false;
+        }
+    }
+
+    // helpers
 
     private void closeAdIfPresent() {
 
