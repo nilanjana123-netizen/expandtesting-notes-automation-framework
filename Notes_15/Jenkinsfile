@@ -3,30 +3,23 @@ pipeline {
     agent any
 
     tools {
-
         maven 'Maven'
-        jdk 'JDK21'
+        jdk   'JDK21'
     }
 
     stages {
 
         stage('Build and Test') {
-
             steps {
-
                 dir('Notes_15') {
-
                     bat 'mvn clean test'
                 }
             }
         }
 
         stage('Run JMeter Test') {
-
             steps {
-
                 dir('Notes_15') {
-
                     bat '''
                     jmeter -n -t performance/jmeter/testplans/testplan.jmx ^
                     -l performance/jmeter/results/results.jtl ^
@@ -37,49 +30,16 @@ pipeline {
         }
 
         stage('Generate JMeter HTML Report') {
-
             steps {
-
                 dir('Notes_15') {
-
                     bat '''
                     if exist performance\\jmeter\\results\\html-report (
                         rmdir /s /q performance\\jmeter\\results\\html-report
                     )
-
                     jmeter -g performance/jmeter/results/results.jtl ^
                     -o performance/jmeter/results/html-report
                     '''
                 }
-            }
-        }
-
-        stage('Generate Allure Report') {
-
-            steps {
-
-                allure([
-                        includeProperties: false,
-                        jdk: '',
-                        results: [[path: 'Notes_15/allure-results']]
-                ])
-            }
-        }
-
-        stage('Publish JMeter HTML Report') {
-
-            steps {
-
-                publishHTML([
-
-                        allowMissing: true,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true,
-
-                        reportDir: 'Notes_15/performance/jmeter/results/html-report',
-                        reportFiles: 'index.html',
-                        reportName: 'JMeter HTML Report'
-                ])
             }
         }
     }
@@ -88,13 +48,35 @@ pipeline {
 
         always {
 
-            junit 'Notes_15/target/surefire-reports/*.xml'
+            allure([
+                includeProperties: false,
+                jdk: 'JDK21',
+                results: [[path: 'Notes_15/allure-results']]
+            ])
 
-            archiveArtifacts artifacts: 'Notes_15/screenshots/*.png',
-                    allowEmptyArchive: true
+            publishHTML([
+                allowMissing:          true,
+                alwaysLinkToLastBuild: true,
+                keepAll:               true,
+                reportDir:             'Notes_15/performance/jmeter/results/html-report',
+                reportFiles:           'index.html',
+                reportName:            'JMeter HTML Report'
+            ])
 
-            archiveArtifacts artifacts: 'Notes_15/performance/jmeter/results/**/*',
-                    allowEmptyArchive: true
+            junit(
+                testResults:          'Notes_15/target/surefire-reports/**/*.xml',
+                allowEmptyResults:    true
+            )
+
+            archiveArtifacts(
+                artifacts:        'Notes_15/screenshots/*.png',
+                allowEmptyArchive: true
+            )
+
+            archiveArtifacts(
+                artifacts:        'Notes_15/performance/jmeter/results/**/*',
+                allowEmptyArchive: true
+            )
         }
     }
 }
