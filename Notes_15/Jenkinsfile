@@ -3,6 +3,7 @@ pipeline {
     agent any
 
     tools {
+
         maven 'Maven'
         jdk 'JDK21'
     }
@@ -10,33 +11,70 @@ pipeline {
     stages {
 
         stage('Build and Test') {
+
             steps {
 
-                bat 'mvn clean test'
+                dir('Notes_15') {
+
+                    bat 'mvn clean test'
+                }
+            }
+        }
+
+        stage('Run JMeter Test') {
+
+            steps {
+
+                dir('Notes_15') {
+
+                    bat '''
+                    jmeter -n -t performance/jmeter/testplans/testplan.jmx ^
+                    -l performance/jmeter/results/results.jtl ^
+                    -j performance/jmeter/results/jmeter.log
+                    '''
+                }
+            }
+        }
+
+        stage('Generate JMeter HTML Report') {
+
+            steps {
+
+                dir('Notes_15') {
+
+                    bat '''
+                    jmeter -g performance/jmeter/results/results.jtl ^
+                    -o performance/jmeter/results/html-report
+                    '''
+                }
             }
         }
 
         stage('Generate Allure Report') {
+
             steps {
 
-                allure(
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'allure-results']]
-                )
+                allure([
+                        includeProperties: false,
+                        jdk: '',
+                        results: [[path: 'Notes_15/allure-results']]
+                ])
             }
         }
 
-        stage('Publish HTML Report') {
+        stage('Publish JMeter HTML Report') {
+
             steps {
 
-                publishHTML(target: [
-                    allowMissing: true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'target/surefire-reports',
-                    reportFiles: 'emailable-report.html',
-                    reportName: 'TestNG HTML Report'
+                publishHTML([
+
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+
+                        reportDir: 'Notes_15/performance/jmeter/results/html-report',
+                        reportFiles: 'index.html',
+                        reportName: 'JMeter HTML Report'
                 ])
             }
         }
@@ -46,9 +84,13 @@ pipeline {
 
         always {
 
-            archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
+            junit 'Notes_15/test-output/**/*.xml'
 
-            junit 'target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: 'Notes_15/screenshots/*.png',
+                    allowEmptyArchive: true
+
+            archiveArtifacts artifacts: 'Notes_15/performance/jmeter/results/**/*',
+                    allowEmptyArchive: true
         }
     }
 }
