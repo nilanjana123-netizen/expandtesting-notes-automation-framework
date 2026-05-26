@@ -43,6 +43,10 @@ pipeline {
                 dir('Notes_15') {
 
                     bat '''
+                    if exist performance\\jmeter\\results\\html-report (
+                        rmdir /s /q performance\\jmeter\\results\\html-report
+                    )
+
                     jmeter -g performance/jmeter/results/results.jtl ^
                     -o performance/jmeter/results/html-report
                     '''
@@ -84,7 +88,7 @@ pipeline {
 
         always {
 
-            junit 'Notes_15/test-output/**/*.xml'
+            junit 'Notes_15/target/surefire-reports/*.xml'
 
             archiveArtifacts artifacts: 'Notes_15/screenshots/*.png',
                     allowEmptyArchive: true
