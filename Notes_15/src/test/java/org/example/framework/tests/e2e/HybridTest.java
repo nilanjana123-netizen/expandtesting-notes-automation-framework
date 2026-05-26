@@ -17,56 +17,52 @@ import static io.restassured.RestAssured.given;
 
 public class HybridTest extends BaseTest {
 
-    @Test
+        @Test
 
-    public void hybridTest() {
+        public void hybridTest() {
 
-        // Step 1:Login via UI
+                // Step 1: Login via UI
 
-        LoginPage loginPage = new LoginPage(driver);
+                LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.loginUser(
-                ConfigReader.getProperty("email"),
-                ConfigReader.getProperty("password")
-        );
+                loginPage.loginUser(
+                                ConfigReader.getProperty("email"),
+                                ConfigReader.getProperty("password"));
 
-        Assert.assertTrue(
-                loginPage.isDashboardDisplayed(),
-                "Dashboard was not displayed after login"
-        );
+                Assert.assertTrue(
+                                loginPage.isDashboardDisplayed(),
+                                "Dashboard was not displayed after login");
 
-        // Step 2:Create a note via UI
+                // Step 2: Create a note via UI
 
-        NotesPage notesPage = new NotesPage(driver);
+                NotesPage notesPage = new NotesPage(driver);
 
-        String title = "Hybrid Note " + System.currentTimeMillis();
+                String title = "Hybrid Note " + System.currentTimeMillis();
 
-        notesPage.createNote(title, "Hybrid Description");
+                notesPage.createNote(title, "Hybrid Description");
 
-        Assert.assertTrue(
-                notesPage.isNoteDisplayed(title),
-                "Hybrid note was not visible in UI after creation"
-        );
+                Assert.assertTrue(
+                                notesPage.isNoteDisplayed(title),
+                                "Hybrid note was not visible in UI after creation");
 
-        // Step 3:Verify the same note exists via API
+                // Step 3: Verify the same note exists via API
 
-        String token = AuthApiUtils.getToken();
+                String token = AuthApiUtils.getToken();
 
-        Response res =
+                Response res =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                .when()
+                                                .when()
 
-                        .get("/notes");
+                                                .get("/notes");
 
-        res.then().statusCode(200);
+                res.then().statusCode(200);
 
-        Assert.assertTrue(
-                res.asString().contains(title),
-                "Hybrid note was not found through API after UI creation"
-        );
-    }
+                Assert.assertTrue(
+                                res.asString().contains(title),
+                                "Hybrid note was not found through API after UI creation");
+        }
 }

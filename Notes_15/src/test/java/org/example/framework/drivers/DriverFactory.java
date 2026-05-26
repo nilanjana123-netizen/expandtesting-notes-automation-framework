@@ -18,8 +18,7 @@ import java.util.Map;
 
 public class DriverFactory {
 
-    private static final ThreadLocal<WebDriver> tlDriver =
-            new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 
     public static WebDriver initializeDriver() {
 
@@ -36,16 +35,13 @@ public class DriverFactory {
 
             options.setExperimentalOption(
                     "excludeSwitches",
-                    new String[]{"enable-automation"}
-            );
+                    new String[] { "enable-automation" });
 
             options.setExperimentalOption(
                     "prefs",
                     Map.of(
                             "credentials_enable_service", false,
-                            "profile.password_manager_enabled", false
-                    )
-            );
+                            "profile.password_manager_enabled", false));
 
             String mode = ConfigReader.getProperty("runMode");
 
@@ -59,8 +55,7 @@ public class DriverFactory {
 
                     driver = new RemoteWebDriver(
                             new URL(hub + "/wd/hub"),
-                            options
-                    );
+                            options);
 
                 } catch (MalformedURLException e) {
 

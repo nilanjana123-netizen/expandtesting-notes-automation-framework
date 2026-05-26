@@ -29,15 +29,13 @@ public class LoginTest extends BaseTest {
 
             Assert.assertTrue(
                     page.isDashboardDisplayed(),
-                    "Dashboard was not displayed after valid login"
-            );
+                    "Dashboard was not displayed after valid login");
 
         } else {
 
             Assert.assertTrue(
                     page.isErrorMessageDisplayed(),
-                    "Error message was not displayed for invalid login"
-            );
+                    "Error message was not displayed for invalid login");
         }
     }
 }

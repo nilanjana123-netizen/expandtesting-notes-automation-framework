@@ -18,10 +18,8 @@ public class ExcelUtils {
 
         try {
 
-            FileInputStream fis =
-                    new FileInputStream(
-                            "src/test/resources/testdata/" + fileName
-                    );
+            FileInputStream fis = new FileInputStream(
+                    "src/test/resources/testdata/" + fileName);
 
             XSSFWorkbook wb = new XSSFWorkbook(fis);
 

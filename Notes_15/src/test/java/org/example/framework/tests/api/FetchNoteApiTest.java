@@ -9,47 +9,45 @@ import static io.restassured.RestAssured.given;
 
 public class FetchNoteApiTest {
 
-    @Test
+        @Test
 
-    public void fetchNoteApiTest() {
+        public void fetchNoteApiTest() {
 
-        String token = AuthApiUtils.getToken();
+                String token = AuthApiUtils.getToken();
 
-        Response res =
+                Response res =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                .when()
+                                                .when()
 
-                        .get("/notes");
+                                                .get("/notes");
 
-        res.then().statusCode(200);
+                res.then().statusCode(200);
 
-        Assert.assertTrue(
-                res.asString().contains("data"),
-                "Notes data was not returned"
-        );
-    }
+                Assert.assertTrue(
+                                res.asString().contains("data"),
+                                "Notes data was not returned");
+        }
 
-    @Test
+        @Test
 
-    public void fetchNotesWithoutTokenTest() {
+        public void fetchNotesWithoutTokenTest() {
 
-        Response res =
+                Response res =
 
-                given()
+                                given()
 
-                .when()
+                                                .when()
 
-                        .get("/notes");
+                                                .get("/notes");
 
-        res.then().statusCode(401);
+                res.then().statusCode(401);
 
-        Assert.assertTrue(
-                res.asString().contains("token"),
-                "Expected unauthorized error mentioning token"
-        );
-    }
+                Assert.assertTrue(
+                                res.asString().contains("token"),
+                                "Expected unauthorized error mentioning token");
+        }
 }

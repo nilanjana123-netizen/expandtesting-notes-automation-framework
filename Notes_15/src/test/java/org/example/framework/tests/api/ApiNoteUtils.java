@@ -28,7 +28,7 @@ public class ApiNoteUtils {
 
                         .header("x-auth-token", token)
 
-                .when()
+                        .when()
 
                         .get("/notes");
 
@@ -49,7 +49,7 @@ public class ApiNoteUtils {
 
                         .header("x-auth-token", token)
 
-                .when()
+                        .when()
 
                         .get("/notes");
 
@@ -57,7 +57,8 @@ public class ApiNoteUtils {
 
         List<?> notes = res.jsonPath().getList("data");
 
-        if (notes == null || notes.size() <= index) return null;
+        if (notes == null || notes.size() <= index)
+            return null;
 
         return res.jsonPath().getString("data[" + index + "]." + field);
     }

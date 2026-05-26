@@ -27,15 +27,13 @@ public class CreateNoteTest extends BaseTest {
             String category,
             String title,
             String description,
-            String expected
-    ) {
+            String expected) {
 
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.loginUser(
                 ConfigReader.getProperty("email"),
-                ConfigReader.getProperty("password")
-        );
+                ConfigReader.getProperty("password"));
 
         NotesPage notesPage = new NotesPage(driver);
 
@@ -49,15 +47,13 @@ public class CreateNoteTest extends BaseTest {
 
             Assert.assertTrue(
                     notesPage.isNoteDisplayed(noteTitle),
-                    "Note '" + noteTitle + "' was not displayed after creation"
-            );
+                    "Note '" + noteTitle + "' was not displayed after creation");
 
         } else {
 
             Assert.assertFalse(
                     notesPage.isNoteDisplayed(noteTitle),
-                    "Invalid note '" + noteTitle + "' should not have been created"
-            );
+                    "Invalid note '" + noteTitle + "' should not have been created");
         }
     }
 }

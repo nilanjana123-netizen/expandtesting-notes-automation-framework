@@ -15,23 +15,17 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    private final By emailBox =
-            By.cssSelector("[data-testid='login-email']");
+    private final By emailBox = By.cssSelector("[data-testid='login-email']");
 
-    private final By passwordBox =
-            By.cssSelector("[data-testid='login-password']");
+    private final By passwordBox = By.cssSelector("[data-testid='login-password']");
 
-    private final By loginBtn =
-            By.cssSelector("[data-testid='login-submit']");
+    private final By loginBtn = By.cssSelector("[data-testid='login-submit']");
 
-    private final By dashboard =
-            By.cssSelector("[data-testid='add-new-note']");
+    private final By dashboard = By.cssSelector("[data-testid='add-new-note']");
 
-    private final By errorMsg =
-            By.xpath(
-                    "//*[contains(@class,'invalid-feedback') "
-                            + "or contains(@class,'alert-danger')]"
-            );
+    private final By errorMsg = By.xpath(
+            "//*[contains(@class,'invalid-feedback') "
+                    + "or contains(@class,'alert-danger')]");
 
     public void loginUser(String email, String password) {
 
@@ -48,8 +42,7 @@ public class LoginPage {
         ((JavascriptExecutor) driver)
                 .executeScript(
                         "arguments[0].click();",
-                        driver.findElement(loginBtn)
-                );
+                        driver.findElement(loginBtn));
     }
 
     public boolean isDashboardDisplayed() {

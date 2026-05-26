@@ -14,12 +14,12 @@ import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtils {
 
-    private static final DateTimeFormatter TS =
-            DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS");
+    private static final DateTimeFormatter TS = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS");
 
     public static void captureScreenshot(WebDriver driver, String testName) {
 
-        if (driver == null) return;
+        if (driver == null)
+            return;
 
         try {
 
@@ -27,8 +27,7 @@ public class ScreenshotUtils {
                     .getScreenshotAs(OutputType.FILE);
 
             File dest = new File(
-                    "screenshots/" + testName + "_" + LocalDateTime.now().format(TS) + ".png"
-            );
+                    "screenshots/" + testName + "_" + LocalDateTime.now().format(TS) + ".png");
 
             Files.copy(shot.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
 

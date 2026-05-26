@@ -8,8 +8,7 @@ public class AuthApiUtils {
 
     static {
 
-        RestAssured.baseURI =
-                "https://practice.expandtesting.com/notes/api";
+        RestAssured.baseURI = "https://practice.expandtesting.com/notes/api";
     }
 
     public static String getToken() {

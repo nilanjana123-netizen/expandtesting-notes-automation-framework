@@ -9,74 +9,73 @@ import static io.restassured.RestAssured.given;
 
 public class DeleteNoteApiTest {
 
-    @Test
+        @Test
 
-    public void deleteNoteApiTest() {
+        public void deleteNoteApiTest() {
 
-        String token = AuthApiUtils.getToken();
+                String token = AuthApiUtils.getToken();
 
-        String title = "DeleteApiNote" + System.currentTimeMillis();
+                String title = "DeleteApiNote" + System.currentTimeMillis();
 
-        Response created =
+                Response created =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                        .contentType("application/json")
+                                                .contentType("application/json")
 
-                        .body("""
-                                {
-                                  "title":"%s",
-                                  "description":"Delete API Description",
-                                  "category":"Home"
-                                }
-                                """.formatted(title))
+                                                .body("""
+                                                                {
+                                                                  "title":"%s",
+                                                                  "description":"Delete API Description",
+                                                                  "category":"Home"
+                                                                }
+                                                                """.formatted(title))
 
-                .when()
+                                                .when()
 
-                        .post("/notes");
+                                                .post("/notes");
 
-        String id = created.jsonPath().getString("data.id");
+                String id = created.jsonPath().getString("data.id");
 
-        Assert.assertNotNull(id, "Note ID was not generated");
+                Assert.assertNotNull(id, "Note ID was not generated");
 
-        Response deleted =
+                Response deleted =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                .when()
+                                                .when()
 
-                        .delete("/notes/" + id);
+                                                .delete("/notes/" + id);
 
-        deleted.then().statusCode(200);
-    }
+                deleted.then().statusCode(200);
+        }
 
-    @Test
+        @Test
 
-    public void deleteNonExistentNoteTest() {
+        public void deleteNonExistentNoteTest() {
 
-        String token = AuthApiUtils.getToken();
+                String token = AuthApiUtils.getToken();
 
-        String fakeId = "lizard";
+                String fakeId = "lizard";
 
-        Response res =
+                Response res =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                .when()
+                                                .when()
 
-                        .delete("/notes/" + fakeId);
+                                                .delete("/notes/" + fakeId);
 
-        res.then().statusCode(400);
+                res.then().statusCode(400);
 
-        Assert.assertFalse(
-                res.asString().contains("\"success\":true"),
-                "Delete should not succeed for non-existent note id: " + fakeId
-        );
-    }
+                Assert.assertFalse(
+                                res.asString().contains("\"success\":true"),
+                                "Delete should not succeed for non-existent note id: " + fakeId);
+        }
 }

@@ -23,66 +23,52 @@ public class NotesPage {
         this.driver = driver;
     }
 
-    //Locators 
+    // ── Locators ──────────────────────────────────────────────────────────────
 
-    private final By addBtn =
-            By.cssSelector("[data-testid='add-new-note']");
+    private final By addBtn = By.cssSelector("[data-testid='add-new-note']");
 
-    private final By titleBox =
-            By.cssSelector("[data-testid='note-title']");
+    private final By titleBox = By.cssSelector("[data-testid='note-title']");
 
-    private final By descBox =
-            By.cssSelector("[data-testid='note-description']");
+    private final By descBox = By.cssSelector("[data-testid='note-description']");
 
-    private final By saveBtn =
-            By.xpath(
-                    "//button[@data-testid='note-submit']"
-                            + " | //button[contains(text(),'Create')]"
-                            + " | //button[contains(text(),'Save')]"
-                            + " | //button[contains(text(),'Update')]"
-            );
+    private final By saveBtn = By.xpath(
+            "//button[@data-testid='note-submit']"
+                    + " | //button[contains(text(),'Create')]"
+                    + " | //button[contains(text(),'Save')]"
+                    + " | //button[contains(text(),'Update')]");
 
-    private final By categoryDrop =
-            By.cssSelector("[data-testid='note-category']");
+    private final By categoryDrop = By.cssSelector("[data-testid='note-category']");
 
-    private final By adClose =
-            By.xpath(
-                    "//*[self::a or self::button or self::span]"
-                            + "[normalize-space(text())='Close'"
-                            + " or normalize-space(text())='×'"
-                            + " or @aria-label='Close']"
-                            + "[not(ancestor::*[@data-testid='note-submit'])]"
-            );
+    private final By adClose = By.xpath(
+            "//*[self::a or self::button or self::span]"
+                    + "[normalize-space(text())='Close'"
+                    + " or normalize-space(text())='×'"
+                    + " or @aria-label='Close']"
+                    + "[not(ancestor::*[@data-testid='note-submit'])]");
 
-    private final By modalClose =
-            By.xpath(
-                    "//*[contains(@class,'modal') or contains(@class,'dialog')]"
-                            + "//button[@aria-label='Close'"
-                            + "       or @data-testid='note-cancel'"
-                            + "       or contains(text(),'Close')"
-                            + "       or contains(text(),'Cancel')"
-                            + "       or contains(@class,'btn-close')]"
-            );
+    private final By modalClose = By.xpath(
+            "//*[contains(@class,'modal') or contains(@class,'dialog')]"
+                    + "//button[@aria-label='Close'"
+                    + "       or @data-testid='note-cancel'"
+                    + "       or contains(text(),'Close')"
+                    + "       or contains(text(),'Cancel')"
+                    + "       or contains(@class,'btn-close')]");
 
-    private final By deleteConfirm =
-            By.xpath(
-                    "//button[@data-testid='note-delete-confirm'"
-                            + " or contains(text(),'Yes')"
-                            + " or contains(text(),'Confirm')"
-                            + " or (contains(text(),'Delete')"
-                            + "     and not(@data-testid='note-delete'))]"
-            );
+    private final By deleteConfirm = By.xpath(
+            "//button[@data-testid='note-delete-confirm'"
+                    + " or contains(text(),'Yes')"
+                    + " or contains(text(),'Confirm')"
+                    + " or (contains(text(),'Delete')"
+                    + "     and not(@data-testid='note-delete'))]");
 
-    private final By editConfirm =
-            By.xpath(
-                    "//button[@data-testid='note-edit-confirm'"
-                            + " or (contains(text(),'Yes')"
-                            + "     and not(@data-testid='note-delete-confirm'))"
-                            + " or contains(text(),'Save Changes')"
-                            + " or contains(text(),'Confirm')]"
-            );
+    private final By editConfirm = By.xpath(
+            "//button[@data-testid='note-edit-confirm'"
+                    + " or (contains(text(),'Yes')"
+                    + "     and not(@data-testid='note-delete-confirm'))"
+                    + " or contains(text(),'Save Changes')"
+                    + " or contains(text(),'Confirm')]");
 
-    //Public actions 
+    // ── Public actions ────────────────────────────────────────────────────────
 
     public void createNote(String title, String desc) {
 
@@ -118,13 +104,11 @@ public class NotesPage {
 
         closeAdIfPresent();
 
-        By editBtn =
-                By.xpath(
-                        "//div[@data-testid='note-card-title'"
-                                + " and text()='" + oldTitle + "']"
-                                + "/ancestor::div[contains(@class,'card')]"
-                                + "//button[@data-testid='note-edit']"
-                );
+        By editBtn = By.xpath(
+                "//div[@data-testid='note-card-title'"
+                        + " and text()='" + oldTitle + "']"
+                        + "/ancestor::div[contains(@class,'card')]"
+                        + "//button[@data-testid='note-edit']");
 
         WebElement btn = WaitUtils.waitForClickable(driver, editBtn);
 
@@ -144,13 +128,11 @@ public class NotesPage {
 
         closeAdIfPresent();
 
-        By deleteBtn =
-                By.xpath(
-                        "//div[@data-testid='note-card-title'"
-                                + " and text()='" + title + "']"
-                                + "/ancestor::div[contains(@class,'card')]"
-                                + "//button[@data-testid='note-delete']"
-                );
+        By deleteBtn = By.xpath(
+                "//div[@data-testid='note-card-title'"
+                        + " and text()='" + title + "']"
+                        + "/ancestor::div[contains(@class,'card')]"
+                        + "//button[@data-testid='note-delete']");
 
         WebElement btn = WaitUtils.waitForClickable(driver, deleteBtn);
 
@@ -168,7 +150,8 @@ public class NotesPage {
 
             alertDone = true;
 
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         if (!alertDone) {
 
@@ -182,21 +165,19 @@ public class NotesPage {
 
     public boolean isNoteDisplayed(String title) {
 
-        if (title == null || title.isEmpty()) return false;
+        if (title == null || title.isEmpty())
+            return false;
 
-        By card =
-                By.xpath(
-                        "//div[@data-testid='note-card-title'"
-                                + " and text()='" + title + "']"
-                );
+        By card = By.xpath(
+                "//div[@data-testid='note-card-title'"
+                        + " and text()='" + title + "']");
 
         try {
 
             new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.or(
                             ExpectedConditions.visibilityOfElementLocated(card),
-                            ExpectedConditions.invisibilityOfElementLocated(card)
-                    ));
+                            ExpectedConditions.invisibilityOfElementLocated(card)));
 
             return !driver.findElements(card).isEmpty();
 
@@ -206,7 +187,7 @@ public class NotesPage {
         }
     }
 
-    // Private helpers
+    // ── Private helpers ───────────────────────────────────────────────────────
 
     private void closeAdIfPresent() {
 
@@ -219,7 +200,8 @@ public class NotesPage {
 
             sleep(600);
 
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     private void acceptPopupIfPresent(By locator) {
@@ -233,7 +215,8 @@ public class NotesPage {
 
             sleep(500);
 
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     private void fillModal(String title, String desc, String category) {
@@ -290,13 +273,15 @@ public class NotesPage {
                 sleep(500);
             }
 
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     private void sleep(long ms) {
 
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException ignored) {}
+        } catch (InterruptedException ignored) {
+        }
     }
 }

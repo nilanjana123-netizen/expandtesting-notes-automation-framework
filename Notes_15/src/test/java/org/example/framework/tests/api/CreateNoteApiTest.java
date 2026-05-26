@@ -9,73 +9,71 @@ import static io.restassured.RestAssured.given;
 
 public class CreateNoteApiTest {
 
-    @Test
+        @Test
 
-    public void createNoteApiTest() {
+        public void createNoteApiTest() {
 
-        String token = AuthApiUtils.getToken();
+                String token = AuthApiUtils.getToken();
 
-        String title = "Automation Note " + System.currentTimeMillis();
+                String title = "Automation Note " + System.currentTimeMillis();
 
-        Response res =
+                Response res =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                        .contentType("application/json")
+                                                .contentType("application/json")
 
-                        .body("""
-                                {
-                                  "title":"%s",
-                                  "description":"Automation Description",
-                                  "category":"Home"
-                                }
-                                """.formatted(title))
+                                                .body("""
+                                                                {
+                                                                  "title":"%s",
+                                                                  "description":"Automation Description",
+                                                                  "category":"Home"
+                                                                }
+                                                                """.formatted(title))
 
-                .when()
+                                                .when()
 
-                        .post("/notes");
+                                                .post("/notes");
 
-        res.then().statusCode(200);
+                res.then().statusCode(200);
 
-        Assert.assertTrue(
-                res.asString().contains(title),
-                "Created note title not found in response"
-        );
-    }
+                Assert.assertTrue(
+                                res.asString().contains(title),
+                                "Created note title not found in response");
+        }
 
-    @Test
+        @Test
 
-    public void createNoteEmptyTitleTest() {
+        public void createNoteEmptyTitleTest() {
 
-        String token = AuthApiUtils.getToken();
+                String token = AuthApiUtils.getToken();
 
-        Response res =
+                Response res =
 
-                given()
+                                given()
 
-                        .header("x-auth-token", token)
+                                                .header("x-auth-token", token)
 
-                        .contentType("application/json")
+                                                .contentType("application/json")
 
-                        .body("""
-                                {
-                                  "title":"",
-                                  "description":"Some description",
-                                  "category":"Home"
-                                }
-                                """)
+                                                .body("""
+                                                                {
+                                                                  "title":"",
+                                                                  "description":"Some description",
+                                                                  "category":"Home"
+                                                                }
+                                                                """)
 
-                .when()
+                                                .when()
 
-                        .post("/notes");
+                                                .post("/notes");
 
-        res.then().statusCode(400);
+                res.then().statusCode(400);
 
-        Assert.assertTrue(
-                res.asString().contains("\"success\":false"),
-                "Expected success to be false for empty title"
-        );
-    }
+                Assert.assertTrue(
+                                res.asString().contains("\"success\":false"),
+                                "Expected success to be false for empty title");
+        }
 }

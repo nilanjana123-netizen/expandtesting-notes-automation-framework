@@ -7,17 +7,14 @@ import java.util.Properties;
 
 public class ConfigReader {
 
-    private static final Properties props =
-            new Properties();
+    private static final Properties props = new Properties();
 
     static {
 
         try {
 
-            FileInputStream fis =
-                    new FileInputStream(
-                            "src/test/resources/config.properties"
-                    );
+            FileInputStream fis = new FileInputStream(
+                    "src/test/resources/config.properties");
 
             props.load(fis);
 

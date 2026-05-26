@@ -14,55 +14,51 @@ import org.testng.annotations.Test;
 
 public class EditNoteTest extends BaseTest {
 
-    private String existingTitle;
+        private String existingTitle;
 
-    @BeforeMethod(alwaysRun = true)
+        @BeforeMethod(alwaysRun = true)
 
-    public void fetchExistingNoteTitle() {
+        public void fetchExistingNoteTitle() {
 
-        existingTitle = ApiNoteUtils.getFirstNoteTitle();
+                existingTitle = ApiNoteUtils.getFirstNoteTitle();
 
-        Assert.assertNotNull(
-                existingTitle,
-                "No notes found in the account via GET /notes. "
-                        + "Please make sure at least one note exists "
-                        + "at https://practice.expandtesting.com/notes/app "
-                        + "before running EditNoteTest."
-        );
-    }
+                Assert.assertNotNull(
+                                existingTitle,
+                                "No notes found in the account via GET /notes. "
+                                                + "Please make sure at least one note exists "
+                                                + "at https://practice.expandtesting.com/notes/app "
+                                                + "before running EditNoteTest.");
+        }
 
-    @Test
+        @Test
 
-    public void editExistingNoteTest() {
+        public void editExistingNoteTest() {
 
-        LoginPage loginPage = new LoginPage(driver);
+                LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.loginUser(
-                ConfigReader.getProperty("email"),
-                ConfigReader.getProperty("password")
-        );
+                loginPage.loginUser(
+                                ConfigReader.getProperty("email"),
+                                ConfigReader.getProperty("password"));
 
-        Assert.assertTrue(
-                loginPage.isDashboardDisplayed(),
-                "Dashboard not shown after login"
-        );
+                Assert.assertTrue(
+                                loginPage.isDashboardDisplayed(),
+                                "Dashboard not shown after login");
 
-        NotesPage notesPage = new NotesPage(driver);
+                NotesPage notesPage = new NotesPage(driver);
 
-        Assert.assertTrue(
-                notesPage.isNoteDisplayed(existingTitle),
-                "Note '" + existingTitle + "' fetched via API was not visible in the UI before editing"
-        );
+                Assert.assertTrue(
+                                notesPage.isNoteDisplayed(existingTitle),
+                                "Note '" + existingTitle
+                                                + "' fetched via API was not visible in the UI before editing");
 
-        String newTitle = "EditedNote_" + System.currentTimeMillis();
+                String newTitle = "EditedNote_" + System.currentTimeMillis();
 
-        String newDesc = "Updated via automation on " + System.currentTimeMillis();
+                String newDesc = "Updated via automation on " + System.currentTimeMillis();
 
-        notesPage.editNoteByTitle(existingTitle, newTitle, newDesc);
+                notesPage.editNoteByTitle(existingTitle, newTitle, newDesc);
 
-        Assert.assertTrue(
-                notesPage.isNoteDisplayed(newTitle),
-                "Updated note title '" + newTitle + "' was not visible after editing"
-        );
-    }
+                Assert.assertTrue(
+                                notesPage.isNoteDisplayed(newTitle),
+                                "Updated note title '" + newTitle + "' was not visible after editing");
+        }
 }

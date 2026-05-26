@@ -17,12 +17,10 @@ public class BaseTest {
 
     public void setup() {
 
-        driver =
-                DriverFactory.initializeDriver();
+        driver = DriverFactory.initializeDriver();
 
         driver.get(
-                ConfigReader.getProperty("baseUrl")
-        );
+                ConfigReader.getProperty("baseUrl"));
     }
 
     @AfterMethod(alwaysRun = true)
