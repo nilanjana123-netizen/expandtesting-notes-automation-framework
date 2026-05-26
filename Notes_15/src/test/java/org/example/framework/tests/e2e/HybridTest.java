@@ -17,52 +17,96 @@ import static io.restassured.RestAssured.given;
 
 public class HybridTest extends BaseTest {
 
-        @Test
+    @Test
+    public void hybridTest() {
 
-        public void hybridTest() {
+        //Step 1: Login via UI 
 
-                // Step 1: Login via UI
+        LoginPage loginPage = new LoginPage(driver);
 
-                LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginUser(
+                ConfigReader.getProperty("email"),
+                ConfigReader.getProperty("password")
+        );
 
-                loginPage.loginUser(
-                                ConfigReader.getProperty("email"),
-                                ConfigReader.getProperty("password"));
+        Assert.assertTrue(
+                loginPage.isDashboardDisplayed(),
+                "Dashboard was not displayed after login"
+        );
 
-                Assert.assertTrue(
-                                loginPage.isDashboardDisplayed(),
-                                "Dashboard was not displayed after login");
+        //Step 2: Create a note via UI
 
-                // Step 2: Create a note via UI
+        NotesPage notesPage = new NotesPage(driver);
 
-                NotesPage notesPage = new NotesPage(driver);
+        String title = "Hybrid Note " + System.currentTimeMillis();
 
-                String title = "Hybrid Note " + System.currentTimeMillis();
+        notesPage.createNote(title, "Hybrid Description");
 
-                notesPage.createNote(title, "Hybrid Description");
+        Assert.assertTrue(
+                notesPage.isNoteDisplayed(title),
+                "Note was not visible in UI after creation"
+        );
 
-                Assert.assertTrue(
-                                notesPage.isNoteDisplayed(title),
-                                "Hybrid note was not visible in UI after creation");
+        //Step 3: Fetch note via API and extract its ID
 
-                // Step 3: Verify the same note exists via API
+        String token = AuthApiUtils.getToken();
 
-                String token = AuthApiUtils.getToken();
+        Response fetchRes =
+                given()
+                        .header("x-auth-token", token)
+                .when()
+                        .get("/notes");
 
-                Response res =
+        fetchRes.then().statusCode(200);
 
-                                given()
+        Assert.assertTrue(
+                fetchRes.asString().contains(title),
+                "Note was not found via API after UI creation"
+        );
 
-                                                .header("x-auth-token", token)
+        String noteId = fetchRes.jsonPath()
+                .param("t", title)
+                .getString("data.find { it.title == t }.id");
 
-                                                .when()
+        Assert.assertNotNull(noteId, "Note ID could not be extracted from API response");
 
-                                                .get("/notes");
+        //Step 4: Delete note via API 
 
-                res.then().statusCode(200);
+        Response deleteRes =
+                given()
+                        .header("x-auth-token", token)
+                .when()
+                        .delete("/notes/" + noteId);
 
-                Assert.assertTrue(
-                                res.asString().contains(title),
-                                "Hybrid note was not found through API after UI creation");
-        }
+        deleteRes.then().statusCode(200);
+
+        Assert.assertTrue(
+                deleteRes.jsonPath().getBoolean("success"),
+                "API delete did not return success=true"
+        );
+
+        //Step 5: Verify note no longer exists via API 
+
+        Response checkApiRes =
+                given()
+                        .header("x-auth-token", token)
+                .when()
+                        .get("/notes");
+
+        checkApiRes.then().statusCode(200);
+
+        Assert.assertFalse(
+                checkApiRes.asString().contains(title),
+                "Deleted note still appears in API response"
+        );
+
+        //Step 6: Verify note no longer exists via UI 
+
+        driver.navigate().refresh();
+
+        Assert.assertTrue(
+                notesPage.isNoteAbsent(title),
+                "Deleted note still appears in the UI after deletion"
+        );
+    }
 }
