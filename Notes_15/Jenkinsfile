@@ -3,109 +3,52 @@ pipeline {
     agent any
 
     tools {
-
         maven 'Maven'
         jdk 'JDK21'
-
     }
 
     stages {
 
         stage('Build and Test') {
-
             steps {
 
-                dir('Notes_15') {
-
-                    bat 'mvn clean test'
-
-                }
-
+                bat 'mvn clean test'
             }
-
         }
 
         stage('Generate Allure Report') {
-
             steps {
 
-                dir('Notes_15') {
-
-                    bat '''
-                    if exist allure-report (
-                        rmdir /s /q allure-report
-                    )
-                    '''
-
-                    allure includeProperties: false,
-                           jdk: '',
-                           results: [[path: 'allure-results']]
-
-                }
-
+                allure(
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'allure-results']]
+                )
             }
-
         }
 
-        stage('Run JMeter Tests') {
-
+        stage('Publish HTML Report') {
             steps {
 
-                dir('Notes_15') {
-
-                    bat '''
-                    if exist performance\\jmeter\\results\\html-report (
-                        rmdir /s /q performance\\jmeter\\results\\html-report
-                    )
-                    '''
-
-                    bat '''
-                    if exist performance\\jmeter\\results\\results.jtl (
-                        del /f /q performance\\jmeter\\results\\results.jtl
-                    )
-                    '''
-
-                    bat '''
-                    if exist performance\\jmeter\\results\\jmeter.log (
-                        del /f /q performance\\jmeter\\results\\jmeter.log
-                    )
-                    '''
-
-                    bat '''
-                    jmeter -n ^
-                    -t performance/jmeter/testplans/testplan.jmx ^
-                    -l performance/jmeter/results/results.jtl ^
-                    -j performance/jmeter/results/jmeter.log
-                    '''
-
-                    bat '''
-                    jmeter -g performance/jmeter/results/results.jtl ^
-                    -o performance/jmeter/results/html-report
-                    '''
-
-                }
-
-            }
-
-        }
-
-        stage('Publish JMeter Report') {
-
-            steps {
-
-                publishHTML([
+                publishHTML(target: [
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'Notes_15/performance/jmeter/results/html-report',
-                    reportFiles: 'index.html',
-                    reportName: 'JMeter HTML Report'
+                    reportDir: 'target/surefire-reports',
+                    reportFiles: 'emailable-report.html',
+                    reportName: 'TestNG HTML Report'
                 ])
-
             }
-
         }
-
     }
 
+    post {
+
+        always {
+
+            archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
+
+            junit 'target/surefire-reports/*.xml'
+        }
+    }
 }
