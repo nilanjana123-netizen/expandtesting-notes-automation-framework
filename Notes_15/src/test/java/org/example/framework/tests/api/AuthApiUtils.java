@@ -4,12 +4,7 @@ import io.restassured.RestAssured;
 
 import io.restassured.response.Response;
 
-public class AuthApiUtils {
-
-    static {
-
-        RestAssured.baseURI = "https://practice.expandtesting.com/notes/api";
-    }
+public class AuthApiUtils extends ApiUtils{
 
     public static String getToken() {
 
