@@ -52,6 +52,10 @@ public class DeleteNoteApiTest {
                                                 .delete("/notes/" + id);
 
                 deleted.then().statusCode(200);
+                deleted.then().statusCode(200);
+                Assert.assertTrue(
+                                deleted.asString().contains("Note successfully deleted"),
+                                "Delete confirmation message was not returned");
         }
 
         @Test
