@@ -23,7 +23,7 @@ public class NotesPage {
         this.driver = driver;
     }
 
-    // ── Locators ──────────────────────────────────────────────────────────────
+    // locators
 
     private final By addBtn = By.cssSelector("[data-testid='add-new-note']");
 
@@ -68,7 +68,7 @@ public class NotesPage {
                     + " or contains(text(),'Save Changes')"
                     + " or contains(text(),'Confirm')]");
 
-    // ── Public actions ────────────────────────────────────────────────────────
+    // to be called from ui tests
 
     public void createNote(String title, String desc) {
 
